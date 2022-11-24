@@ -1,10 +1,13 @@
 package com.example.zeidspizza
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 
 import android.widget.*
@@ -42,17 +45,35 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-        sizeval.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        sizeval.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 flag = options1.get(p2) //p2 is the index of selected item
-    }
+            }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
+
+
         }
 
 }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.my_menu, menu)
+        return super.onCreateOptionsMenu(menu)    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var report= ReportClass()
+        when(item.itemId){
+            R.id.subitem1 -> report.show(supportFragmentManager, "Custom Dialog")
+
+
+
+
+            R.id.subitem2 -> android.os.Process.killProcess(android.os.Process.myPid())
+        }
+        return true;
+    }
 
 }
 
