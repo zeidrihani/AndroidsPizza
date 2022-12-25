@@ -1,6 +1,7 @@
 package com.example.zeidspizza
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.navigation.NavigationBarView
 
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val button: Button = findViewById(R.id.order)
+        val button2: Button= findViewById(R.id.proceed)
         val edtxt1: EditText = findViewById(R.id.pizzas)
         val total: TextView = findViewById(R.id.total)
         val sizeval : Spinner = findViewById(R.id.size)
@@ -34,17 +37,24 @@ class MainActivity : AppCompatActivity() {
             var x: Int = edtxt1.text.toString().toInt();
             if(flag =="Large"){
                 var y:Int = 4
-                total.text = "your total is : "+mul(x,y).toString();}
+                total.text = "Your Total Is : "+mul(x,y).toString();}
             else if (flag == "Medium"){
                 var z:Int = 3
-                 total.text = "your total is : "+mul(x,z).toString();}
+                 total.text = "Your Total Is : "+mul(x,z).toString();}
             else{
                 var h:Int = 2
-                 total.text = "your total is : "+mul(x,h).toString();}
+                 total.text = "Your Total Is : "+mul(x,h).toString();}
 
+            button2.setVisibility(View.VISIBLE)
 
 
         }
+        button2.setOnClickListener{ view ->
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+
+
         sizeval.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 flag = options1.get(p2) //p2 is the index of selected item
